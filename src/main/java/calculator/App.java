@@ -4,6 +4,9 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) {
+        int[] arr = new int[4];  // result 저장 변수
+        int lastIndex = 0;  // result의 마지막 index 변수 선언
+        
         Scanner sc = new Scanner(System.in);
         int result = 0;
 
@@ -38,7 +41,11 @@ public class App {
                     System.out.println("올바른 기호를 입력해주세요.");
                     continue;
             }
-            System.out.println(result);
+            System.out.println("결과"+result);
+
+            arr[lastIndex] = result;
+            ++ lastIndex;
+
             System.out.println("더 계산하시겠습니까? (eixt 입력 시 종료)");
             String op = sc.next();
             if(op.equals("exit")) {
