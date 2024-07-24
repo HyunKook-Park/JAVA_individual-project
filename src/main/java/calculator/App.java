@@ -2,13 +2,11 @@ package calculator;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Queue;
-import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
-        // int[] arr = new int[3];  // result 저장 변수
-        int lastIndex = 0;  // result의 마지막 index 변수 선언
+        // int[] arr = new int[3];
+        int lastIndex = 0;
         ArrayList<Integer> list = new ArrayList<Integer>();
         Scanner sc = new Scanner(System.in);
         int result = 0;
@@ -56,13 +54,31 @@ public class App {
 //                }
 //                arr[arr.length-1] = result;
 //            }
+
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             String remove = sc.next();
 
             if(remove.equals("remove")) {
-                list.remove(0);
+                if (!list.isEmpty()) {
+                    list.remove(0);
+                }else{
+                    System.out.println("삭제할 결과가 없습니다.");
+                }
             }
-            System.out.println("더 계산하시겠습니까? (eixt 입력 시 종료)");
+
+            System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
+            String inquiry = sc.next();
+
+
+            if(inquiry.equals("inquiry")) {
+                int a = 1;
+                for(int i : list) {
+                    System.out.println(a+ "에" + " 저장된 연산결과 : " + i);
+                    a++;
+                }
+            }
+
+            System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
             String op = sc.next();
             if(op.equals("exit")) {
                 break;
