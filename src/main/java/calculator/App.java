@@ -39,7 +39,11 @@ public class App {
                     continue;
             }
             System.out.println(result);
-            break;
+            System.out.println("더 계산하시겠습니까? (eixt 입력 시 종료)");
+            String op = sc.next();
+            if(op.equals("exit")) {
+                break;
+            }
         }
     }
 }
