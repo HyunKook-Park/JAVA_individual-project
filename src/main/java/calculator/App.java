@@ -1,10 +1,12 @@
 package calculator;
 
 import java.util.Scanner;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class App {
     public static void main(String[] args) {
-        int[] arr = new int[4];  // result 저장 변수
+        int[] arr = new int[3];  // result 저장 변수
         int lastIndex = 0;  // result의 마지막 index 변수 선언
         
         Scanner sc = new Scanner(System.in);
@@ -45,6 +47,13 @@ public class App {
 
             arr[lastIndex] = result;
             ++ lastIndex;
+            if (lastIndex == arr.length - 1) {
+                System.out.println("저장 공간이 가득 찼으므로, 처음 입력했던 결과 값을 삭제하겠습니다.");
+                for(int i=0; i<arr.length - 1; i++) {
+                    arr[i]+=1;
+                }
+                arr[arr.length-1] = result;
+            }
 
             System.out.println("더 계산하시겠습니까? (eixt 입력 시 종료)");
             String op = sc.next();
