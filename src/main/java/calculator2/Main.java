@@ -6,7 +6,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
         Scanner sc = new Scanner(System.in);
         Calculator calc = new Calculator();
 
@@ -45,7 +44,7 @@ public class Main {
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             String inquiry = sc.next();
             if (inquiry.equals("inquiry")) {
-                List<Double> results = calc.getResults();
+                List<Double> results = calc.inquiryResults();
                 int a = 1;
                 for (double i : results) {
                     System.out.println(a + "에 저장된 연산결과 : " + i);
