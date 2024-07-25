@@ -1,11 +1,12 @@
 package calculator2;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        ArrayList<Double> list = new ArrayList<>();
+
         Scanner sc = new Scanner(System.in);
         Calculator calc = new Calculator();
 
@@ -21,7 +22,6 @@ public class Main {
                 try {
                     result = calc.calculate(num1, num2, operator);
                     System.out.println("결과: " + result);
-                    list.add(result);
                     break; // 정상적으로 계산되면 내부 while 루프 종료
                 } catch (BadException e) {
                     System.out.println(e.getMessage());
@@ -36,21 +36,35 @@ public class Main {
             System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
             String remove = sc.next();
             if (remove.equals("remove")) {
-                if (!list.isEmpty()) {
-                    list.remove(0);
-                    System.out.println("가장 먼저 저장된 연산 결과가 삭제되었습니다.");
-                } else {
-                    System.out.println("삭제할 결과가 없습니다.");
-                }
+                calc.removeResult();
+                System.out.println("가장 먼저 저장된 연산 결과가 삭제되었습니다.");
+            } else {
+                System.out.println("삭제할 결과가 없습니다.");
             }
 
             System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
             String inquiry = sc.next();
             if (inquiry.equals("inquiry")) {
+                List<Double> results = calc.getResults();
                 int a = 1;
-                for (double i : list) {
+                for (double i : results) {
                     System.out.println(a + "에 저장된 연산결과 : " + i);
                     a++;
+                }
+            }
+
+            System.out.println("저장된 연산 결과를 수정하시겠습니까? (yes 입력 시 수정)");
+            String modify = sc.next();
+            if (modify.equals("yes")) {
+                System.out.println("수정할 인덱스를 입력하세요 (0부터 시작)");
+                int index = sc.nextInt();
+                System.out.println("새로운 값을 입력하세요: ");
+                double newValue = sc.nextDouble();
+                try {
+                    calc.setResult(index, newValue);
+                    System.out.println("수정되었습니다.");
+                } catch (BadException e) {
+                    System.out.println(e.getMessage());
                 }
             }
 

@@ -1,6 +1,7 @@
 package calculator2;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Calculator {
     ArrayList<Double> list = new ArrayList<Double>();
@@ -29,5 +30,23 @@ public class Calculator {
         }
         list.add(result);
         return result;
+    }
+
+    public List<Double> getResults(){
+        return new ArrayList<>(list);
+    }
+
+    public void removeResult(){
+        if(!list.isEmpty()){
+            list.remove(0);
+        }
+    }
+
+    public void setResult(int index, double value) throws BadException {
+        if (index >= 0 && index < list.size()) {
+            list.set(index, value);
+        } else{
+            throw new BadException("올바른 값이 아닙니다.");
+        }
     }
 }
