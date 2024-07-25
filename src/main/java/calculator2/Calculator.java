@@ -6,6 +6,8 @@ import java.util.List;
 public class Calculator {
     ArrayList<Double> list = new ArrayList<Double>();
 
+    private static final double PI = 3.141592653589793;  // 원주율 상수로 정의
+
     // 생성자를 통한 초기화 2-6
     public Calculator() {
         this.list = new ArrayList<Double>();  // 이를 통해 객체 생성 시 list는 'null'이 아닌 비어있는 'ArrayList'로 초기화 됨.
@@ -37,6 +39,10 @@ public class Calculator {
         }
         list.add(result);
         return result;
+    }
+
+    public double calculateCircleArea(double radius) {
+        return PI * radius * radius;
     }
 
     public List<Double> inquiryResults(){
