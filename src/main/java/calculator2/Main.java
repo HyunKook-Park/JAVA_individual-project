@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws BadException {
         Scanner sc = new Scanner(System.in);
-        Calculator calc = new Calculator();
+        Calculator calc1 = new ArtimaticCalculator();
+        Calculator calc2 = new CircleCalculator();
 
         String command="";
         while(!command.equals("exit")) {
@@ -20,7 +21,6 @@ public class Main {
 
             if (command.equals("1")) {
                 while (true) {
-
                     int num1;   // 첫 번째 입력 숫자
                     int num2;   // 두 번째 입력 숫자
                     char operator;  // 사칙 연산 기호
@@ -29,7 +29,6 @@ public class Main {
                     System.out.print("첫 번째 숫자를 입력하세요: ");
                     num1 = sc.nextInt();
                     while (true) {
-
                         System.out.print("두 번째 숫자를 입력하세요: ");
                         num2 = sc.nextInt();
 
@@ -37,7 +36,7 @@ public class Main {
                         operator = sc.next().charAt(0);
 
                         try {
-                            result = calc.calculate(num1, num2, operator);
+                            result = calc1.calculate(num1, num2, operator);
                             System.out.println("결과: " + result);
                             break; // 정상적으로 계산되면 내부 while 루프 종료
                         } catch (BadException e) {
@@ -51,9 +50,9 @@ public class Main {
                     }
 
                     // 연산 종료 후 옵션
-                    RemoveResult(sc, calc);
-                    InquiryOption(sc, calc);
-                    EditOption(sc, calc);
+                    RemoveResult(sc, calc1);
+                    InquiryOption(sc, calc1);
+                    EditOption(sc, calc1);
 
                     System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
                     command = sc.next();
@@ -66,7 +65,7 @@ public class Main {
                 while (true) {
                     System.out.println("원의 반지름을 입력하세요");
                     double radius = sc.nextDouble();
-                    double area = calc.calculateCircleArea(radius);
+                    double area = calc2.calculateCircleArea(radius);
                     System.out.println("원의 넓이: " + area);
                     System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
 
@@ -89,21 +88,21 @@ public class Main {
         System.out.println("exit 입력 시 종료");
 
     }
-    private static void RemoveResult(Scanner sc, Calculator calc){
+    private static void RemoveResult(Scanner sc, Calculator calc1){
         System.out.println("가장 먼저 저장된 연산 결과를 삭제하시겠습니까? (remove 입력 시 삭제)");
         String remove = sc.next();
         if (remove.equals("remove")) {
-            calc.removeResult();
+            calc1.removeResult();
             System.out.println("가장 먼저 저장된 연산 결과가 삭제되었습니다.");
         } else {
             System.out.println("삭제할 결과가 없습니다.");
         }
     }
-    private static void InquiryOption(Scanner sc, Calculator calc){
+    private static void InquiryOption(Scanner sc, Calculator calc1){
         System.out.println("저장된 연산결과를 조회하시겠습니까? (inquiry 입력 시 조회)");
         String inquiry = sc.next();
         if (inquiry.equals("inquiry")) {
-            List<Double> results = calc.inquiryResults();
+            List<Double> results = calc1.inquiryResults();
             int a = 1;
             for (double i : results) {
                 System.out.println(a + "번째 연산에 저장된 연산결과 : " + i);
@@ -111,7 +110,7 @@ public class Main {
             }
         }
     }
-    private static void EditOption(Scanner sc, Calculator calc){
+    private static void EditOption(Scanner sc, Calculator calc1){
         System.out.println("저장된 연산 결과를 수정하시겠습니까? (yes 입력 시 수정)");
         String modify = sc.next();
         if (modify.equals("yes")) {
@@ -120,7 +119,7 @@ public class Main {
             System.out.println("새로운 값을 입력하세요: ");
             double newValue = sc.nextDouble();
             try {
-                calc.setResult(index, newValue);
+                calc1.setResult(index, newValue);
                 System.out.println("수정되었습니다.");
             } catch (BadException e) {
                 System.out.println(e.getMessage());

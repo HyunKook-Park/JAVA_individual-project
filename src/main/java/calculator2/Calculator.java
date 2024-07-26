@@ -1,12 +1,11 @@
 package calculator2;
-
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 
-public class Calculator {
-    ArrayList<Double> list = new ArrayList<Double>();
+public abstract class Calculator {
+    protected List<Double> list;
 
-    private static final double PI = 3.141592653589793;  // 원주율 상수로 정의
+
 
     // 생성자를 통한 초기화 2-6
     public Calculator() {
@@ -15,35 +14,10 @@ public class Calculator {
          // 'null' 상태에서는 메서드를 호출하거나 해당 속성에 접근하려고 하면, 'NullpointException' 오류 발생.
          // 초기화된 필드는 적절한 값이나 객체를 참조하여, 메서드 호출이나 데이터 접근이 정상적으로 이루어짐
 
-    public double calculate(int num1, int num2, char method) throws BadException {
-        double result = 0;
-        switch (method) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if (num2 == 0) {
-                    throw new BadException("나눗셈 할 수 없음");
-                } else {
-                    result = num1 / (double) num2;
-                }
-                break;
-            default:
-                throw new BadException("입력 에러");
-        }
-        list.add(result);
-        return result;
-    }
+    public abstract double calculate(int num1, int num2, char operator) throws BadException;
 
-    public double calculateCircleArea(double radius) {
-        return PI * radius * radius;
-    }
+    public abstract double calculateCircleArea(double radius) throws BadException;
+
 
     public List<Double> inquiryResults(){
         return new ArrayList<>(list);
