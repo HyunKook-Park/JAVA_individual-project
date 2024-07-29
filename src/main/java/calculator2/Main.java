@@ -66,9 +66,6 @@ public class Main {
                     System.out.println("원의 반지름을 입력하세요");
                     double radius = sc.nextDouble();
                     double area = calc2.calculateCircleArea(radius);
-                    System.out.println("원의 넓이: " + area);
-                    System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
-
                     command = sc.next();
                     if (command.equals("exit")) {
                         break;

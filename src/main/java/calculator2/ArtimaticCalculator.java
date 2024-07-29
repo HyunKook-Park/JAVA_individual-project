@@ -1,30 +1,26 @@
 package calculator2;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class ArtimaticCalculator extends Calculator {
+    private final Map<Character, Operator> operators = new HashMap<>();
+
+    public ArtimaticCalculator() {
+        operators.put('+', new AddOperator());
+        operators.put('-', new SubtractOperator());
+        operators.put('*', new MultiplyOperator());
+        operators.put('/', new DivideOperator());
+        operators.put('%', new ModOperator());
+    }
 
     @Override
     public double calculate(int num1, int num2, char operator) throws BadException {
-        double result = 0;
-        switch (operator) {
-            case '+':
-                result = num1 + num2;
-                break;
-            case '-':
-                result = num1 - num2;
-                break;
-            case '*':
-                result = num1 * num2;
-                break;
-            case '/':
-                if (num2 == 0) {
-                    throw new BadException("나눗셈 할 수 없음");
-                } else {
-                    result = num1 / (double) num2;
-                }
-                break;
-            default:
-                throw new BadException("입력 에러");
+        Operator op = operators.get(operator);
+        if (op == null) {
+            throw new BadException("Unknown operator: " + operator);
         }
+        double result = op.operate(num1, num2);
         list.add(result);
         return result;
     }

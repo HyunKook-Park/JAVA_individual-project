@@ -7,7 +7,8 @@ public class CircleCalculator extends Calculator {
     @Override
     public double calculateCircleArea(double radius) {
         double area = PI * radius * radius;
-        list.add(area);
+        System.out.println("원의 넓이: " + area);
+        System.out.println("더 계산하시겠습니까? (exit 입력 시 종료)");
         return area;
     }
 
