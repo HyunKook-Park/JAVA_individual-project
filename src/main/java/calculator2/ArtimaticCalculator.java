@@ -4,23 +4,30 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ArtimaticCalculator extends Calculator {
-    private final Map<Character, Operator> operators = new HashMap<>();
+    private final Map<OperatorType, Operator> operators = new HashMap<>();
 
     public ArtimaticCalculator() {
-        operators.put('+', new AddOperator());
-        operators.put('-', new SubtractOperator());
-        operators.put('*', new MultiplyOperator());
-        operators.put('/', new DivideOperator());
-        operators.put('%', new ModOperator());
+        operators.put(OperatorType.ADD, new AddOperator());
+        operators.put(OperatorType.SUBTRACT, new SubtractOperator());
+        operators.put(OperatorType.MULTIPLY, new MultiplyOperator());
+        operators.put(OperatorType.DIVIDE, new DivideOperator());
+        operators.put(OperatorType.MOD, new ModOperator());
     }
 
     @Override
-    public double calculate(int num1, int num2, char operator) throws BadException {
-        Operator op = operators.get(operator);
-        if (op == null) {
-            throw new BadException("Unknown operator: " + operator);
+    public double calculate(int num1, int num2, char operatorSymbol) throws BadException {
+        OperatorType operatorType;
+        try {
+            operatorType = OperatorType.fromSymbol(operatorSymbol);
+        } catch (IllegalArgumentException e) {
+            throw new BadException(e.getMessage());
         }
-        double result = op.operate(num1, num2);
+
+        Operator operator = operators.get(operatorType);
+        if (operator == null) {
+            throw new BadException("Unknown operator: " + operatorSymbol);
+        }
+        double result = operator.operate(num1, num2);
         list.add(result);
         return result;
     }
@@ -29,5 +36,4 @@ public class ArtimaticCalculator extends Calculator {
     public double calculateCircleArea(double radius) throws BadException {
         throw new BadException("사칙연산 계산기에서는 원의 넓이를 계산할 수 없습니다.");
     }
-
 }
