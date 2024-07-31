@@ -1,12 +1,12 @@
 package calculator2;
 
-public class DivideOperator implements Operator{
+public class DivideOperator<T extends Number> implements Operator<T>{
     @Override
-    public double operate(int num1, int num2) throws BadException {
-        if (num2 == 0) {
+    public double operate(T num1, T num2) throws BadException {
+        if (num2.doubleValue() == 0) {
             throw new BadException("나눗셈 할 수 없음");
         } else {
-            return num1 / (double) num2;
+            return num1.doubleValue() / num2.doubleValue();
         }
     }
 }

@@ -1,8 +1,9 @@
 package calculator2;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
-public abstract class Calculator {
+public abstract class Calculator<T extends Number> {
     protected List<Double> list;
 
 
@@ -14,7 +15,7 @@ public abstract class Calculator {
          // 'null' 상태에서는 메서드를 호출하거나 해당 속성에 접근하려고 하면, 'NullpointException' 오류 발생.
          // 초기화된 필드는 적절한 값이나 객체를 참조하여, 메서드 호출이나 데이터 접근이 정상적으로 이루어짐
 
-    public abstract double calculate(int num1, int num2, char operator) throws BadException;
+    public abstract double calculate(T num1, T num2, char operator) throws BadException;
 
     public abstract double calculateCircleArea(double radius) throws BadException;
 

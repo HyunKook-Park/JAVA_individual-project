@@ -1,6 +1,6 @@
 package calculator2;
 
-public class CircleCalculator extends Calculator {
+public class CircleCalculator<T extends Number> extends Calculator<T> {
 
     private static final double PI = 3.141592653589793;  // 원주율 상수로 정의
 
@@ -13,7 +13,7 @@ public class CircleCalculator extends Calculator {
     }
 
     @Override
-    public double calculate(int num1, int num2, char method) throws BadException{
+    public double calculate(T num1, T num2, char method) throws BadException{
         throw new BadException("원 계산기에서는 사칙연산을 수행할 수 없습니다.");
     }
 
